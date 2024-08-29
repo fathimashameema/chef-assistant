@@ -1,4 +1,3 @@
-import 'package:chef_assistant/introscreens/introscreen2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,80 +6,58 @@ class Introscreen1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-        backgroundColor: Colors.black,
-        body: Stack(
-          children: [
-            Positioned(
-                top: 50,
-                right: 30,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
-                )),
-            Positioned(
-              top: 120,
-              left: 25,
-              child: Container(
-                height: 350,
-                width: 350,
-                // color: Colors.yellow,
-                child: Image(
-                    image:
-                        AssetImage('assets/images/intoduction screen (2).png')),
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Positioned(
+            top: screenHeight * 0.15,
+            left: screenWidth * 0.07,
+            child: Container(
+              height: screenHeight * 0.4,
+              width: screenWidth * 0.86,
+              child: Image.asset(
+                'assets/images/intoduction screen (2).png',
+                fit: BoxFit.contain,
               ),
             ),
-            Positioned(
-              bottom: 250,
-              left: 95,
+          ),
+          Positioned(
+            bottom: screenHeight * 0.31,
+            left: screenWidth * 0.25,
+            child: Text(
+              'Find your Dish',
+              style: GoogleFonts.lemon(
+                fontSize: screenWidth * 0.065,
+                fontWeight: FontWeight.w500,
+                color: Color.fromARGB(255, 210, 153, 20),
+              ),
+            ),
+          ),
+          // Description Text
+          Positioned(
+            bottom: screenHeight * 0.148,
+            left: screenWidth * 0.04,
+            child: Container(
+              height: screenHeight * 0.125,
+              width: screenWidth * 0.89,
               child: Text(
-                'Find your Dish',
-                style: GoogleFonts.lemon(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 210, 153, 20),
+                'Explore the varieties of recipes and find your comfort food. '
+                'Find your favourite Dish with Chef Assistant.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.05,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
                 ),
               ),
             ),
-            Positioned(
-              bottom: 120,
-              left: 15,
-              child: Container(
-                height: 100,
-                width: 350,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  '  Explore the varieties of  recipes and find your comfort  food . Find your favourite Dish with Chef Assistant. ',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.white,
-                    // wordSpacing: 2,
-                    // letterSpacing: 2,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 60,
-              right: 40,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (cnxt) {
-                      return Introscreen2();
-                    }));
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    size: 20,
-                  )),
-            )
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

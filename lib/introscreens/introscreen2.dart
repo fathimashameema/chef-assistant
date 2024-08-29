@@ -1,4 +1,3 @@
-import 'package:chef_assistant/introscreens/introscreen3.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,26 +6,18 @@ class Introscreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
           children: [
             Positioned(
-                top: 50,
-                right: 30,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
-                )),
-            Positioned(
-              top: 120,
-              left: 25,
+              top: screenHeight * 0.15,
+              left: screenWidth * 0.07,
               child: Container(
-                height: 350,
-                width: 350,
+                height: screenHeight * 0.4,
+                width: screenWidth * 0.86,
                 // color: Colors.yellow,
                 child: Image(
                     image:
@@ -34,28 +25,28 @@ class Introscreen2 extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 250,
-              left: 85,
+              bottom: screenHeight * 0.31,
+              left: screenWidth * 0.2,
               child: Text(
                 'Refresh your soul',
                 style: GoogleFonts.lemon(
-                  fontSize: 25,
+                  fontSize: screenWidth * 0.065,
                   fontWeight: FontWeight.w500,
                   color: Color.fromARGB(255, 210, 153, 20),
                 ),
               ),
             ),
             Positioned(
-              bottom: 120,
-              left: 15,
+              bottom: screenHeight * 0.148,
+              left: screenWidth * 0.04,
               child: Container(
-                height: 100,
-                width: 350,
+                height: screenHeight * 0.125,
+                width: screenWidth * 0.89,
                 child: Text(
                   textAlign: TextAlign.center,
                   '  Find your favourite drinks by wandering through the virtual pages . ',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: screenWidth * 0.05,
                     fontWeight: FontWeight.w300,
                     color: Colors.white,
                     // wordSpacing: 2,
@@ -64,22 +55,6 @@ class Introscreen2 extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 60,
-              right: 40,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (cnxt) {
-                      return Introscreen3();
-                    }));
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.white,
-                    size: 20,
-                  )),
-            )
           ],
         ));
   }

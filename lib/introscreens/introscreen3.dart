@@ -1,4 +1,5 @@
-import 'package:chef_assistant/introscreens/userlogin.dart';
+import 'package:chef_assistant/customs/custom_styles.dart';
+import 'package:chef_assistant/screens/user/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,54 +8,46 @@ class Introscreen3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Colors.black,
         body: Stack(
           children: [
             Positioned(
-                top: 50,
-                right: 30,
-                child: Text(
-                  'Skip',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
-                  ),
-                )),
-            Positioned(
-              top: 120,
-              left: 25,
+              top: screenHeight * 0.15,
+              left: screenWidth * 0.07,
               child: Container(
-                height: 350,
-                width: 350,
+                height: screenHeight * 0.4,
+                width: screenWidth * 0.86,
                 // color: Colors.yellow,
                 child: Image(
                     image: AssetImage('assets/images/intoduction screen.png')),
               ),
             ),
             Positioned(
-              bottom: 250,
-              left: 135,
+              bottom: screenHeight * 0.31,
+              left: screenWidth * 0.35,
               child: Text(
                 'Diet plan',
                 style: GoogleFonts.lemon(
-                  fontSize: 25,
+                  fontSize: screenWidth * 0.065,
                   fontWeight: FontWeight.w500,
                   color: Color.fromARGB(255, 210, 153, 20),
                 ),
               ),
             ),
             Positioned(
-              bottom: 120,
-              left: 15,
+              bottom: screenHeight * 0.148,
+              left: screenWidth * 0.04,
               child: Container(
-                height: 100,
-                width: 350,
+                height: screenHeight * 0.125,
+                width: screenWidth * 0.89,
                 child: Text(
                   textAlign: TextAlign.center,
                   ' Maintain your health by following our proper diet plan',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: screenWidth * 0.05,
                     fontWeight: FontWeight.w300,
                     color: Colors.white,
                     // wordSpacing: 2,
@@ -64,21 +57,12 @@ class Introscreen3 extends StatelessWidget {
               ),
             ),
             Positioned(
-                bottom: 50,
-                left: 50,
+                bottom: screenHeight * 0.06,
+                left: screenWidth * 0.13,
                 child: Container(
-                  width: 300,
+                  width: screenWidth * 0.75,
                   child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(
-                          Color.fromARGB(255, 190, 190, 164),
-                        ),
-                        shape: WidgetStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                      ),
+                      style: customButtonStyle(),
                       onPressed: () {
                         Navigator.of(context)
                             .pushReplacement(MaterialPageRoute(builder: (cnxt) {
@@ -87,10 +71,7 @@ class Introscreen3 extends StatelessWidget {
                       },
                       child: Text(
                         'Get started',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
+                        style: customButtonText(),
                       )),
                 ))
           ],

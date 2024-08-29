@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "chef_assistant",
+            "program": "lib/screens/main.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "chef_assistant (profile mode)",
+            "program": "lib/screens/main.dart",
+
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "chef_assistant (release mode)",
+            "program": "lib/screens/main.dart",
+
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
