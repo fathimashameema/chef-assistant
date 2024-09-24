@@ -1,16 +1,16 @@
 import 'package:chef_assistant/customs/custom_bottomnavbar.dart';
 import 'package:chef_assistant/screens/admin/add_recipe/admin_add_recipe.dart';
-import 'package:chef_assistant/screens/admin/add_recipe/overview.dart';
-import 'package:chef_assistant/screens/admin/admin_categories.dart';
+import 'package:chef_assistant/screens/admin/admin_category/admin_categories.dart';
 import 'package:chef_assistant/screens/admin/admin_homepage.dart';
 import 'package:chef_assistant/screens/admin/admin_items_list.dart';
 import 'package:chef_assistant/screens/admin/admin_notifications.dart';
-import 'package:chef_assistant/screens/user/add_recipe.dart';
 
 import 'package:flutter/material.dart';
 
 class AdminSide extends StatefulWidget {
   const AdminSide({super.key});
+   static int selectedIndex = 0;
+
 
   @override
   State<AdminSide> createState() => _AdminSideState();
@@ -26,14 +26,13 @@ class _AdminSideState extends State<AdminSide> {
   ];
 
   List<Widget> pages = [
-    AdminHomepage(),
-    AdminCategories(),
-    AdminAddRecipe(),
-    AdminItemsList(),
-    AdminNotifications(),
+    const AdminHomepage(),
+    const AdminCategories(),
+    const AdminAddRecipe(),
+    const AdminItemsList(),
+    const AdminNotifications(),
   ];
 
-  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -41,7 +40,7 @@ class _AdminSideState extends State<AdminSide> {
 
     return Scaffold(
       body: Stack(children: [
-        pages[selectedIndex],
+        pages[AdminSide.selectedIndex],
         Positioned(
           bottom: screenHeight * 0.015,
           left: screenWidth * 0.045,
@@ -49,7 +48,7 @@ class _AdminSideState extends State<AdminSide> {
               items: navItems,
               onTap: (index) {
                 setState(() {
-                  selectedIndex = index;
+                 AdminSide.selectedIndex = index;
                 });
               }),
         ),

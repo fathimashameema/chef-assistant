@@ -1,6 +1,4 @@
 import 'package:chef_assistant/customs/colors.dart';
-import 'package:contained_tab_bar_view_with_custom_page_navigator/contained_tab_bar_view_with_custom_page_navigator.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,7 +31,7 @@ InputDecoration customInputDecoration(
 
 TextStyle customHeadingStyle(
     {Color? color = PresetColors.offwhite,
-    double? fontSize = 30,
+    double? fontSize = 25,
     FontWeight? fontWeight = FontWeight.w500}) {
   return TextStyle(
     color: color,
@@ -220,12 +218,12 @@ AlertDialog customAlertDialogue({
     content: content,
     actions: actions,
     backgroundColor: backgroundColor,
-    titleTextStyle: TextStyle(
+    titleTextStyle:const TextStyle(
       color: PresetColors.white,
       fontSize: 23,
       fontWeight: FontWeight.w400,
     ),
-    contentTextStyle: TextStyle(
+    contentTextStyle:const TextStyle(
       color: PresetColors.white,
       fontSize: 15,
     ),
@@ -240,7 +238,7 @@ Widget customTabBar({
     dividerHeight: 0,
     indicator: UnderlineTabIndicator(
         borderRadius: BorderRadius.circular(5),
-        borderSide: BorderSide(
+        borderSide:const BorderSide(
           color: PresetColors.yellow,
           width: 3,
         )),
@@ -248,7 +246,7 @@ Widget customTabBar({
     indicatorWeight: 4,
     labelColor: PresetColors.offwhite,
     unselectedLabelColor: PresetColors.white,
-    labelStyle: TextStyle(fontSize: 15),
+    labelStyle:const TextStyle(fontSize: 15),
   );
 }
 
@@ -282,13 +280,40 @@ InputDecoration descriptionInputDec({
   TextStyle? hintStyle,
 }) {
   return InputDecoration(
-      enabledBorder: UnderlineInputBorder(
+      enabledBorder:const UnderlineInputBorder(
         borderSide: BorderSide(width: 0, color: PresetColors.transparent),
       ),
-      focusedBorder: UnderlineInputBorder(
+      focusedBorder:const UnderlineInputBorder(
         borderSide: BorderSide(width: 0, color: PresetColors.transparent),
       ),
       hintMaxLines: 10,
-      hintStyle: hintStyle ?? TextStyle(color: PresetColors.fadedgrey),
+      hintStyle: hintStyle ??const TextStyle(color: PresetColors.fadedgrey),
       hintText: hintText);
+}
+
+TextStyle homeHeadingStyle({
+  double fontSize = 20,
+  Color color = PresetColors.yellow,
+}) {
+  return GoogleFonts.ledger(
+    fontSize: fontSize,
+    color: color,
+  );
+}
+
+ButtonStyle chipButtonstyle({Color? backgroundcolor = PresetColors.nudegrey}) {
+  return ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(backgroundcolor),
+  );
+}
+
+TextStyle customCategoryText({
+  Color color = PresetColors.white,
+  double fontSize = 18,
+}) {
+  return GoogleFonts.ledger(
+      color: color,
+      fontSize: fontSize,
+      shadows:
+          List.filled(3,const Shadow(color: PresetColors.fadedgrey, blurRadius: 8)));
 }

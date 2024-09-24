@@ -39,24 +39,30 @@ class _SplashscreenState extends State<Splashscreen> {
   }
 
   Future animate() async {
-    await Future.delayed(Duration(milliseconds: 6000));
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (ctx) => Introductionscreen()));
+    await Future.delayed(const Duration(milliseconds: 6000));
+
+    if (LoginStatus().hasSeenIntro == false) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const Introductionscreen()));
+      LoginStatus().hasSeenIntro = true;
+    } else {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const Userlogin()));
+    }
   }
 
   void entryCheck() {
     if (LoginStatus().isLogged && LoginStatus().isAdmin) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (ctx) => AdminSide()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const AdminSide()));
     } else if (LoginStatus().isLogged) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (ctx) => UserSide()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const UserSide()));
     } else if (LoginStatus().hasSeenIntro) {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (ctx) => Userlogin()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const Userlogin()));
     } else {
       animate();
     }
   }
 }
-

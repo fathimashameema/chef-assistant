@@ -19,20 +19,32 @@ class UserValuesAdapter extends TypeAdapter<UserValues> {
     return UserValues(
       username: fields[0] as String,
       password: fields[1] as String,
-      email: fields[2] as String,
+      email: fields[2] as String?,
+      id: fields[3] as int?,
+      hasSeenIntro: fields[6] as bool,
+      isAdmin: fields[4] as bool,
+      isLogged: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserValues obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.username)
       ..writeByte(1)
       ..write(obj.password)
       ..writeByte(2)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.isAdmin)
+      ..writeByte(5)
+      ..write(obj.isLogged)
+      ..writeByte(6)
+      ..write(obj.hasSeenIntro);
   }
 
   @override

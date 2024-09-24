@@ -1,33 +1,42 @@
-import 'package:flutter/widgets.dart';
+import 'dart:typed_data';
+
 import 'package:hive_flutter/hive_flutter.dart';
 part 'recipe_items.g.dart';
 
 @HiveType(typeId: 1)
 class RecipeItems extends HiveObject {
   @HiveField(0)
-  late String title;
+  final String? title;
 
   @HiveField(1)
-  late String description;
+  final String? description;
 
   @HiveField(2)
-  late String prepTime;
+  final String? prepTime;
 
   @HiveField(3)
-  late String ingredients;
+  final List<String>? ingredients;
 
   @HiveField(4)
-  late String directions;
+  final String? directions;
 
   @HiveField(5)
-  late Image image;
+  Uint8List? image;
+
+  @HiveField(6)
+  bool? isVeg;
+
+  @HiveField(7)
+  List<String>? categories;
 
   RecipeItems({
-    required String title,
-    String? description,
-    String? prepTime,
-    required String ingredients,
-    required String directions,
-    Image? image,
+    this.isVeg,
+    this.title,
+    this.description,
+    this.prepTime,
+    this.ingredients,
+    this.directions,
+    this.image,
+    this.categories,
   });
 }

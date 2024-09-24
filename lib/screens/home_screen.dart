@@ -13,6 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return LoginStatus().isAdmin ? AdminSide() : UserSide();
+    return LoginStatus().isAdmin ? const AdminSide() : const UserSide();
   }
 }

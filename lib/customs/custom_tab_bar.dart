@@ -7,7 +7,7 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   final Color indicatorColor;
   final double indicatorWeight;
 
-  CustomTabBar({
+  const CustomTabBar({super.key, 
     required this.tabs,
     required this.controller,
     this.indicatorColor = Colors.yellow,
@@ -23,8 +23,8 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
       indicatorWeight: indicatorWeight,
       labelColor: PresetColors.offwhite,
       unselectedLabelColor: PresetColors.white,
-      labelStyle: TextStyle(fontSize: 15),
-      indicator: BoxDecoration(
+      labelStyle:const TextStyle(fontSize: 15),
+      indicator:const BoxDecoration(
         color: Colors.transparent, // Transparent to avoid any background
       ),
       // Add other customization options as needed
@@ -32,5 +32,5 @@ class CustomTabBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(50.0);
+  Size get preferredSize =>const Size.fromHeight(50.0);
 }

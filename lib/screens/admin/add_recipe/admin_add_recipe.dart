@@ -1,4 +1,5 @@
 import 'package:chef_assistant/customs/colors.dart';
+import 'package:chef_assistant/customs/custom_appbar.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
 import 'package:chef_assistant/screens/admin/add_recipe/directions.dart';
 import 'package:chef_assistant/screens/admin/add_recipe/ingredients.dart';
@@ -19,7 +20,7 @@ class _AdminAddRecipeState extends State<AdminAddRecipe> {
       length: 3,
       child: Scaffold(
           backgroundColor: PresetColors.black,
-          appBar: AppBar(
+          appBar: CustomAppBar(
             title: Text(
               'Add Recipe',
               style: customHeadingStyle(),
@@ -32,13 +33,13 @@ class _AdminAddRecipeState extends State<AdminAddRecipe> {
               Container(
                 child: customTabBar(
                   tabs: [
-                    Tab(text: 'Overview'),
-                    Tab(text: 'Ingredients'),
-                    Tab(text: 'Description'),
+                   const Tab(text: 'Overview'),
+                   const Tab(text: 'Ingredients'),
+                   const Tab(text: 'Description'),
                   ],
                 ),
               ),
-              Expanded(
+             const Expanded(
                   child: TabBarView(children: [
                 Overview(),
                 Ingredients(),

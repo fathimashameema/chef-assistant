@@ -5,16 +5,16 @@ class CustomChipList extends StatefulWidget {
   final List<String> listOfChipNames;
   final int initialSelectedIndex;
 
-  CustomChipList({
+  const CustomChipList({super.key, 
     required this.listOfChipNames,
     this.initialSelectedIndex = 0,
   });
 
   @override
-  _CustomChipListState createState() => _CustomChipListState();
+  CustomChipListState createState() => CustomChipListState();
 }
 
-class _CustomChipListState extends State<CustomChipList> {
+class CustomChipListState extends State<CustomChipList> {
   int selectedIndex = 0;
 
   @override
@@ -43,12 +43,12 @@ class _CustomChipListState extends State<CustomChipList> {
           selectedColor: PresetColors.fadedgrey,
           disabledColor: PresetColors.nudegrey,
           backgroundColor: PresetColors.nudegrey,
-          labelStyle: TextStyle(color: PresetColors.white),
+          labelStyle:const TextStyle(color: PresetColors.white),
           showCheckmark: false,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           side: BorderSide.none,
-          padding: EdgeInsets.all(10),
+          padding:const EdgeInsets.all(10),
         );
       }),
     );

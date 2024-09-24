@@ -1,10 +1,12 @@
 import 'package:chef_assistant/customs/custom_bottomnavbar.dart';
-import 'package:chef_assistant/screens/user/add_recipe.dart';
+import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/screens/user/user_add_recipe/user_add_recipe.dart';
 import 'package:chef_assistant/screens/user/categories.dart';
-import 'package:chef_assistant/screens/user/favourites.dart';
 import 'package:chef_assistant/screens/user/homepage.dart';
 import 'package:chef_assistant/screens/user/search.dart';
 import 'package:chef_assistant/screens/user/shopping_cart.dart';
+import 'package:chef_assistant/screens/user/user_login.dart';
+import 'package:chef_assistant/screens/user/user_recipes/user_recipes_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,18 +28,18 @@ class _UserSideState extends State<UserSide> {
   ];
 
   List<Widget> pages = [
-    Homepage(),
-    Categories(),
-    AddRecipe(),
-    Favourites(),
-    ShoppingCart(),
-    Search(),
+    const Homepage(),
+    const Categories(),
+    LoginStatus().isLogged ? const UserAddRecipe() : const Userlogin(),
+    LoginStatus().isLogged ? const UserRecipesTab() : const Userlogin(),
+    LoginStatus().isLogged ? const ShoppingCart() : const Userlogin(),
+    const Search(),
   ];
 
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-     final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(children: [

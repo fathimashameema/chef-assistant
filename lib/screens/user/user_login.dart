@@ -24,8 +24,8 @@ class _UserloginState extends State<Userlogin> {
 
   @override
   void dispose() {
-    _username;
-    _password;
+    _username.dispose();
+    _password.dispose();
     // TODO: implement dispose
     super.dispose();
   }
@@ -59,7 +59,7 @@ class _UserloginState extends State<Userlogin> {
                   onTap: () {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (ctxt) {
-                        return HomeScreen();
+                        return const HomeScreen();
                       }),
                       (Route<dynamic> route) => false,
                     );
@@ -217,7 +217,7 @@ class _UserloginState extends State<Userlogin> {
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
-                                              builder: (ctx) => UserSignup()));
+                                              builder: (ctx) => const UserSignup()));
                                     },
                                     child: Text(
                                       'Create an Account',
@@ -250,7 +250,7 @@ class _UserloginState extends State<Userlogin> {
                                         color: PresetColors.white,
                                         size: screenWidth * 0.045,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 6,
                                       ),
                                       Text(
@@ -279,7 +279,7 @@ class _UserloginState extends State<Userlogin> {
     Login().userLogin();
 
     Navigator.of(cntxt).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (ctx) => HomeScreen()),
+      MaterialPageRoute(builder: (ctx) => const HomeScreen()),
       (Route<dynamic> route) => false,
     );
   }
@@ -287,34 +287,36 @@ class _UserloginState extends State<Userlogin> {
   Future adminlogin() async {
     print('tapped');
     Navigator.of(context).push(MaterialPageRoute(builder: (ctxt) {
-      return Adminlogin();
+      return const Adminlogin();
     }));
   }
 
   Future<void> showerror() async {
-    await Future.delayed(Duration(milliseconds: 700));
+    await Future.delayed(const Duration(milliseconds: 700));
     showDialog(
-        context: context,
-        builder: (ctx) {
-          return customAlertDialogue(
-            title: Text('Incorrect information'),
-            content: Text(
-                "The Password/Username you've entered is incorrect. Please try again"),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'ok',
-                    style: TextStyle(
-                      color: PresetColors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )),
-            ],
-          );
-        });
+      context: context,
+      builder: (ctx) {
+        return customAlertDialogue(
+          title: const Text('Incorrect information'),
+          content: const Text(
+              "The Password/Username you've entered is incorrect. Please try again"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'ok',
+                style: TextStyle(
+                  color: PresetColors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

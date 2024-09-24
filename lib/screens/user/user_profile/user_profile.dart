@@ -4,13 +4,11 @@ import 'package:chef_assistant/functions/login.dart';
 import 'package:chef_assistant/functions/login_status.dart';
 import 'package:chef_assistant/screens/admin/admin_login.dart';
 import 'package:chef_assistant/screens/user/user_login.dart';
-import 'package:chef_assistant/screens/user/user_profile/display.dart';
 import 'package:chef_assistant/screens/user/user_profile/edit_password.dart';
 import 'package:chef_assistant/screens/user/user_profile/edit_username.dart';
 import 'package:chef_assistant/screens/user/user_profile/faqs.dart';
 import 'package:chef_assistant/screens/user/user_profile/privacy_policy.dart';
 import 'package:chef_assistant/screens/user/user_profile/terms_conditions.dart';
-import 'package:chef_assistant/screens/user/user_profile/user_feedback.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
@@ -35,26 +33,42 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: PresetColors.transparent,
-          iconTheme: const IconThemeData(color: PresetColors.white),
-        ),
+        // appBar: CustomAppBar(
+        //   title: GestureDetector(
+        //     onTap: () {
+        //       Navigator.of(context).pop();
+        //     },
+        //     child: customArrowBack(),
+        //   ),
+        //   backgroundColor: PresetColors.transparent,
+        //   // iconTheme: const IconThemeData(color: PresetColors.white),
+        // ),
         backgroundColor: PresetColors.black,
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              userProfile(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: customArrowBack(),
+                ),
+              ),
+              Center(child: userProfile()),
               Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
+                height: MediaQuery.of(context).size.height * 0.85,
+                decoration: const BoxDecoration(
                     color: PresetColors.nudegrey,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(30),
                     )),
                 child: Padding(
-                  padding: EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     children: [
                       settingsSections('Account Settings', [
@@ -69,13 +83,13 @@ class _UserProfileState extends State<UserProfile> {
                         settingsItems(
                             'Login as Admin', const Adminlogin(), context),
                       ]),
-                      settingsSections('App Settings', [
-                        settingsItems('Display', const Display(), context),
-                      ]),
+                      // settingsSections('App Settings', [
+                      //   settingsItems('Display', const Display(), context),
+                      // ]),
                       settingsSections('Help & Support', [
                         settingsItems("FAQ's", const Faqs(), context),
-                        settingsItems(
-                            'Feedback', const UserFeedback(), context),
+                        // settingsItems(
+                        //     'Feedback', const UserFeedback(), context),
                       ]),
                       settingsSections('About', [
                         settingsItems(

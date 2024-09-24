@@ -27,7 +27,7 @@ class _EditUsernameState extends State<EditUsername> {
 
   @override
   void dispose() {
-    _usernameController;
+    _usernameController.dispose();
     // TODO: implement dispose
     super.dispose();
   }

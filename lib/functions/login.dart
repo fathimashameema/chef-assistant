@@ -54,7 +54,12 @@ class Login {
 
   void adminLogin() {
     LoginStatus().isAdmin = true;
-    LoginStatus().isLogged = true;
+    // LoginStatus().isLogged = true;
+  }
+
+  void adminLogout() {
+    LoginStatus().isAdmin = false;
+    LoginStatus().isLogged = false;
   }
 
   Future<void> hasSeenIntro() async {

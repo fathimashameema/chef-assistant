@@ -1,7 +1,17 @@
 import 'package:chef_assistant/customs/colors.dart';
+import 'package:chef_assistant/functions/add_categories.dart';
+import 'package:chef_assistant/functions/add_favourites.dart';
 import 'package:chef_assistant/functions/add_item.dart';
+import 'package:chef_assistant/functions/add_shopping_item.dart';
+import 'package:chef_assistant/functions/add_trending_now.dart';
 import 'package:chef_assistant/functions/signup.dart';
+import 'package:chef_assistant/functions/user_add_items.dart';
+import 'package:chef_assistant/models/categories_model.dart';
+import 'package:chef_assistant/models/favourites_model.dart';
 import 'package:chef_assistant/models/recipe_items.dart';
+import 'package:chef_assistant/models/shopping_cart_model.dart';
+import 'package:chef_assistant/models/trending_now.dart';
+import 'package:chef_assistant/models/user_items.dart';
 import 'package:chef_assistant/models/user_values.dart';
 import 'package:chef_assistant/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +19,48 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserValuesAdapter().typeId)) {
     Hive.registerAdapter(UserValuesAdapter());
     await Signup().openBox();
   }
+
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(RecipeItemsAdapter().typeId)) {
     Hive.registerAdapter(RecipeItemsAdapter());
     await AddItem().openRecipeBox();
   }
 
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(TrendingNowAdapter().typeId)) {
+    Hive.registerAdapter(TrendingNowAdapter());
+    await AddTrendingNow().openBox();
+  }
+
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(CategoriesModelAdapter().typeId)) {
+    Hive.registerAdapter(CategoriesModelAdapter());
+    await AddCategories().openCategoriesBox();
+  }
+
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(UserItemsAdapter().typeId)) {
+    Hive.registerAdapter(UserItemsAdapter());
+    await UserAddItems().openUserItemBox();
+  }
+
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(FavouritesModelAdapter().typeId)) {
+    Hive.registerAdapter(FavouritesModelAdapter());
+    await AddFavourites().openFavouritesBox();
+  }
+
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(ShoppingCartModelAdapter().typeId)) {
+    Hive.registerAdapter(ShoppingCartModelAdapter());
+    await AddShoppingItem().openShoppingCartBox();
+  }
   runApp(const ChefAssistant());
 }
 
@@ -33,10 +74,10 @@ class ChefAssistant extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'LeagueSpartan',
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
             bodyLarge: TextStyle(color: PresetColors.white),
           ),
-          inputDecorationTheme: InputDecorationTheme(
+          inputDecorationTheme: const InputDecorationTheme(
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: PresetColors.white),
             ),
@@ -46,7 +87,7 @@ class ChefAssistant extends StatelessWidget {
               ),
             ),
           ),
-          textSelectionTheme: TextSelectionThemeData(
+          textSelectionTheme: const TextSelectionThemeData(
             cursorColor: PresetColors.white,
           )),
     );

@@ -18,13 +18,13 @@ class _AdminloginState extends State<Adminlogin> {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool visibility = false;
-  String crctusername = 'fathima shameema';
+  String crctusername = 'fathimashameema';
   String crctpassword = 'fathym123';
 
   @override
   void dispose() {
-    _username;
-    _password;
+    _username.dispose();
+    _password.dispose();
     // TODO: implement dispose
     super.dispose();
   }
@@ -109,15 +109,15 @@ class _AdminloginState extends State<Adminlogin> {
                                 decoration: InputDecoration(
                                   hintText: 'Your Username',
                                   hintStyle: TextStyle(
-                                    color: Color.fromARGB(255, 125, 123, 123),
+                                    color:const Color.fromARGB(255, 125, 123, 123),
                                     fontSize: screenWidth * 0.046,
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
+                                  enabledBorder:const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.white,
                                     ),
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
+                                  focusedBorder:const UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Color.fromARGB(255, 119, 118, 118),
                                     ),
@@ -151,7 +151,7 @@ class _AdminloginState extends State<Adminlogin> {
                                 decoration: InputDecoration(
                                   hintText: 'Your Password',
                                   hintStyle: TextStyle(
-                                    color: Color.fromARGB(255, 125, 123, 123),
+                                    color:const Color.fromARGB(255, 125, 123, 123),
                                     fontSize: screenWidth * 0.046,
                                   ),
                                   suffixIcon: GestureDetector(
@@ -249,7 +249,7 @@ class _AdminloginState extends State<Adminlogin> {
         password.trim() == crctpassword.trim()) {
       Login().adminLogin();
       Navigator.of(cntxt).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (ctx) => HomeScreen()),
+        MaterialPageRoute(builder: (ctx) =>const HomeScreen()),
         (Route<dynamic> route) => false,
       );
     }

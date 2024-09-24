@@ -1,5 +1,7 @@
 import 'package:chef_assistant/customs/colors.dart';
+import 'package:chef_assistant/customs/custom_appbar.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
+import 'package:chef_assistant/functions/login.dart';
 import 'package:chef_assistant/screens/user/user_login.dart';
 
 import 'package:flutter/material.dart';
@@ -21,9 +23,14 @@ class _AdminProfileState extends State<AdminProfile> {
     // final screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        appBar: CustomAppBar(
           backgroundColor: PresetColors.transparent,
-          iconTheme: const IconThemeData(color: PresetColors.white),
+          title: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: customArrowBack()),
+          // iconTheme: const IconThemeData(color: PresetColors.white),
         ),
         backgroundColor: PresetColors.black,
         body: Column(
@@ -59,6 +66,7 @@ class _AdminProfileState extends State<AdminProfile> {
                   )),
               TextButton(
                   onPressed: () {
+                    Login().adminLogout();
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (ctx) => Userlogin()),
                         (Route<dynamic> route) => false);
@@ -122,7 +130,7 @@ class _AdminProfileState extends State<AdminProfile> {
             style: TextStyle(color: PresetColors.lightRed, fontSize: 20),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         const Center(
@@ -134,7 +142,7 @@ class _AdminProfileState extends State<AdminProfile> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         )
       ],

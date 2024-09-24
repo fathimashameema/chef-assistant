@@ -17,19 +17,21 @@ class RecipeItemsAdapter extends TypeAdapter<RecipeItems> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RecipeItems(
-      title: fields[0] as String,
+      isVeg: fields[6] as bool?,
+      title: fields[0] as String?,
       description: fields[1] as String?,
       prepTime: fields[2] as String?,
-      ingredients: fields[3] as String,
-      directions: fields[4] as String,
-      image: fields[5] as Image?,
+      ingredients: (fields[3] as List?)?.cast<String>(),
+      directions: fields[4] as String?,
+      image: fields[5] as Uint8List?,
+      categories: (fields[7] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, RecipeItems obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -41,7 +43,11 @@ class RecipeItemsAdapter extends TypeAdapter<RecipeItems> {
       ..writeByte(4)
       ..write(obj.directions)
       ..writeByte(5)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(6)
+      ..write(obj.isVeg)
+      ..writeByte(7)
+      ..write(obj.categories);
   }
 
   @override

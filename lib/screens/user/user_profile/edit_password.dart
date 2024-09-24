@@ -26,7 +26,7 @@ class _EditPasswordState extends State<EditPassword> {
 
   @override
   void dispose() {
-    _passwordController;
+    _passwordController.dispose();
     // TODO: implement dispose
     super.dispose();
   }
@@ -72,12 +72,12 @@ class _EditPasswordState extends State<EditPassword> {
                                 });
                               },
                               child: _visibility
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.visibility_off,
                                       color: PresetColors.offwhite,
                                       size: 15,
                                     )
-                                  : Icon(
+                                  : const Icon(
                                       Icons.visibility,
                                       color: PresetColors.offwhite,
                                       size: 15,
@@ -114,7 +114,7 @@ class _EditPasswordState extends State<EditPassword> {
         context: context,
         builder: (ctx) {
           return customAlertDialogue(
-              title: Text('Save changes ?'),
+              title: const Text('Save changes ?'),
               // content: Text('Save changes ?'),
               actions: [
                 TextButton(

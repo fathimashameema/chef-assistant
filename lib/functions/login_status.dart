@@ -6,7 +6,7 @@ class LoginStatus {
   String currentUser = '';
   String currentPassword = '';
   late bool hasSeenIntro = false;
-  int? currentUserId ;
+  int? currentUserId;
 
   factory LoginStatus() {
     return _instance;

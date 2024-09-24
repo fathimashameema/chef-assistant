@@ -6,17 +6,17 @@ class CustomBottomNavBar extends StatefulWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  CustomBottomNavBar({
+ const CustomBottomNavBar({super.key, 
     required this.items,
     this.currentIndex = 0,
     required this.onTap,
   });
 
   @override
-  _CustomBottomNavBarState createState() => _CustomBottomNavBarState();
+  CustomBottomNavBarState createState() => CustomBottomNavBarState();
 }
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+class CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int _selectedIndex = 0;
 
   @override
@@ -30,7 +30,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       // width: double.infinity,
-      padding: EdgeInsets.symmetric(
+      padding:const EdgeInsets.symmetric(
         horizontal: 15,
         vertical: 10,
       ), // Add padding
@@ -63,10 +63,10 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
+                  duration:const Duration(milliseconds: 300),
                   transitionBuilder:
                       (Widget child, Animation<double> animation) {
-                    return FadeTransition(child: child, opacity: animation);
+                    return FadeTransition(opacity: animation, child: child);
                   },
                   child: Icon(
                     item.icon,
@@ -75,9 +75,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                         isSelected ? PresetColors.yellow : PresetColors.white,
                   ),
                 ),
-                SizedBox(height: 6),
+               const SizedBox(height: 6),
                 AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
+                  duration:const Duration(milliseconds: 300),
                   height: 2,
                   width: isSelected ? 30 : 0, // Underline moves and resizes
                   decoration: BoxDecoration(

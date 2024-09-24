@@ -12,7 +12,7 @@ class Introductionscreen extends StatefulWidget {
 }
 
 class _IntroductionscreenState extends State<Introductionscreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   int _currentpage = 0;
 
   @override
@@ -35,7 +35,7 @@ class _IntroductionscreenState extends State<Introductionscreen> {
         children: [
           PageView(
             controller: _controller,
-            children: [
+            children: const [
               Introscreen1(),
               Introscreen2(),
               Introscreen3(),
@@ -48,15 +48,15 @@ class _IntroductionscreenState extends State<Introductionscreen> {
                 onTap: () {
                   if (_currentpage != 2) {
                     _controller.nextPage(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.decelerate);
                   } else {
                     Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (ctx) => HomeScreen()),
+                        MaterialPageRoute(builder: (ctx) => const HomeScreen()),
                         (Route<dynamic> route) => false);
                   }
                 },
-                child: Text(
+                child: const Text(
                   'Skip',
                   style: TextStyle(
                     color: Colors.white,
@@ -71,10 +71,10 @@ class _IntroductionscreenState extends State<Introductionscreen> {
               child: IconButton(
                   onPressed: () {
                     _controller.nextPage(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.decelerate);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_forward_ios_rounded,
                     color: Colors.white,
                     size: 20,

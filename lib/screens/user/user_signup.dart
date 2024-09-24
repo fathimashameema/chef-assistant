@@ -74,13 +74,13 @@ class _UserSignupState extends State<UserSignup> {
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (ctxt) {
-                          return HomeScreen();
+                          return const HomeScreen();
                         },
                       ),
                       (Route<dynamic> route) => false,
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'Skip',
                     style: TextStyle(
                       color: PresetColors.white,
@@ -108,7 +108,7 @@ class _UserSignupState extends State<UserSignup> {
                           ),
                           child: ListView(
                             children: [
-                              Text(
+                              const Text(
                                 'User name',
                                 style: TextStyle(
                                   color: PresetColors.white,
@@ -136,7 +136,7 @@ class _UserSignupState extends State<UserSignup> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              Text(
+                              const Text(
                                 'Password',
                                 style: TextStyle(
                                   color: PresetColors.white,
@@ -164,12 +164,12 @@ class _UserSignupState extends State<UserSignup> {
                                         });
                                       },
                                       child: visibility
-                                          ? Icon(
+                                          ? const Icon(
                                               Icons.visibility_off,
                                               color: PresetColors.white,
                                               size: 15,
                                             )
-                                          : Icon(
+                                          : const Icon(
                                               Icons.visibility,
                                               color: PresetColors.white,
                                               size: 15,
@@ -179,7 +179,7 @@ class _UserSignupState extends State<UserSignup> {
                               const SizedBox(
                                 height: 40,
                               ),
-                              Text(
+                              const Text(
                                 'Email',
                                 style: TextStyle(
                                   color: PresetColors.white,
@@ -243,7 +243,7 @@ class _UserSignupState extends State<UserSignup> {
                                               print('null is here');
                                             }
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Signup',
                                             style: TextStyle(
                                               color: PresetColors.black,
@@ -272,7 +272,7 @@ class _UserSignupState extends State<UserSignup> {
     Login().userLogin();
     LoginStatus().currentUser = _username.text;
     Navigator.of(cntxt).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (ctx) => HomeScreen()),
+      MaterialPageRoute(builder: (ctx) => const HomeScreen()),
       (Route<dynamic> route) => false,
     );
   }
