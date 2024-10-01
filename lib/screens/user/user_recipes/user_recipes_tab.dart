@@ -24,7 +24,7 @@ class _UserRecipesTabState extends State<UserRecipesTab> {
           backgroundColor: PresetColors.black,
           appBar: CustomAppBar(
             title: Text(
-              'Favourites',
+              'Collections',
               style: customHeadingStyle(),
             ),
           ),
@@ -33,12 +33,12 @@ class _UserRecipesTabState extends State<UserRecipesTab> {
               Container(
                 child: customTabBar(
                   tabs: [
-                    Tab(text: 'Favourite Recipes'),
-                    Tab(text: 'My Recipes'),
+                    const Tab(text: 'Favourite Recipes'),
+                    const Tab(text: 'My Recipes'),
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                   child: TabBarView(children: [
                 Favourites(),
                 UserRecipe(),

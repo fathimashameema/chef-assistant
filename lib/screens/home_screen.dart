@@ -1,5 +1,5 @@
 import 'package:chef_assistant/screens/admin/admin_side.dart';
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
 import 'package:chef_assistant/screens/user/user_side.dart';
 import 'package:flutter/material.dart';
 

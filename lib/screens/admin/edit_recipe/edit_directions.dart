@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/add_item.dart';
+import 'package:chef_assistant/db_functions/add_item.dart';
 import 'package:chef_assistant/models/recipe_items.dart';
 import 'package:chef_assistant/screens/admin/add_recipe/recipe_values.dart';
 import 'package:chef_assistant/screens/admin/edit_recipe/edit_recipe_values.dart';
@@ -30,14 +30,12 @@ class _EditDirectionsState extends State<EditDirections> {
     recipeIndex = widget.index;
     recipe = widget.recipe;
     _directionsController = TextEditingController(text: recipe.directions);
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
     _directionsController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -55,75 +53,87 @@ class _EditDirectionsState extends State<EditDirections> {
           },
           child: Scaffold(
               backgroundColor: PresetColors.black,
-              body: ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 40.0,
-                      right: 40,
-                      top: 70,
-                      bottom: 150,
-                    ),
-                    child: Container(
-                      height: screenHeight * 0.4,
-                      width: screenWidth * 0.8,
-                      decoration: BoxDecoration(
-                        color: PresetColors.customBlack,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: Form(
-                          key: _formkey,
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return " Direction field can't be empty";
-                              }
+              body: LayoutBuilder(
+                builder: (context, constraints) {
+                  return ListView(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 40.0,
+                          right: 40,
+                          top: 70,
+                          bottom: 150,
+                        ),
+                        child: Container(
+                          height: constraints.maxWidth < 600
+                              ? screenHeight * 0.4
+                              : screenHeight * 0.7,
+                          width: screenWidth * 0.8,
+                          decoration: BoxDecoration(
+                            color: PresetColors.customBlack,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(40.0),
+                            child: Form(
+                              key: _formkey,
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return " Direction field can't be empty";
+                                  }
 
-                              return null;
-                            },
-                            keyboardType: TextInputType.multiline,
-                            minLines: 1,
-                            maxLines: null,
-                            controller: _directionsController,
-                            onTap: () {
-                              setState(() {
-                                isFocused = true;
-                              });
-                            },
-                            decoration: descriptionInputDec(
-                              hintStyle: TextStyle(
-                                  color: isFocused
-                                      ? PresetColors.nudegrey
-                                      : PresetColors.fadedgrey),
-                              hintText:
-                                  'Jot down ideas, Instructions ,or any other notes for this recipe.',
+                                  return null;
+                                },
+                                keyboardType: TextInputType.multiline,
+                                minLines: 1,
+                                maxLines: null,
+                                controller: _directionsController,
+                                onTap: () {
+                                  setState(() {
+                                    isFocused = true;
+                                  });
+                                },
+                                decoration: descriptionInputDec(
+                                  hintStyle: TextStyle(
+                                      color: isFocused
+                                          ? PresetColors.nudegrey
+                                          : PresetColors.fadedgrey),
+                                  hintText:
+                                      'Jot down ideas, Instructions ,or any other notes for this recipe.',
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  Center(
-                    child: SizedBox(
-                      width: screenWidth * 0.5,
-                      child: TextButton(
-                        onPressed: () {
-                          if (_formkey.currentState != null &&
-                              _formkey.currentState!.validate()) {
-                            editRecipe();
-                          }
-                        },
-                        style: saveButtonStyle(),
-                        child: Text(
-                          'Edit Recipe',
-                          style: saveButtonText(),
+                      Center(
+                        child: SizedBox(
+                          width: constraints.maxWidth < 600
+                              ? screenWidth * 0.5
+                              : screenWidth * 0.3,
+                          child: TextButton(
+                            onPressed: () {
+                              if (_formkey.currentState != null &&
+                                  _formkey.currentState!.validate()) {
+                                editRecipe();
+                              }
+                            },
+                            style: saveButtonStyle(),
+                            child: Text(
+                              'Edit Recipe',
+                              style: saveButtonText(),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                      SizedBox(
+                        height:
+                            constraints.maxWidth < 600 ? 0 : screenWidth * 0.08,
+                      ),
+                    ],
+                  );
+                },
               )),
         );
       },
@@ -183,7 +193,7 @@ class _EditDirectionsState extends State<EditDirections> {
       );
     } else if (EditRecipeValues.obj.ingredients != null &&
         EditRecipeValues.obj.title != null) {
-     List< String>? ingredients = EditRecipeValues.obj.ingredients;
+      List<String>? ingredients = EditRecipeValues.obj.ingredients;
       String? title = EditRecipeValues.obj.title;
       String? description = EditRecipeValues.obj.descrption;
       String? prepTime = EditRecipeValues.obj.prepTime;

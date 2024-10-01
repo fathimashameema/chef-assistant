@@ -21,7 +21,6 @@ class _AdminEditRecipeState extends State<AdminEditRecipe> {
   late RecipeItems recipe;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     recipeIndex = widget.index;
     recipe = widget.recipe;

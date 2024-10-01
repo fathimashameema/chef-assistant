@@ -1,3 +1,4 @@
+import 'package:chef_assistant/db_functions/login_status_functions.dart';
 import 'package:chef_assistant/screens/home_screen.dart';
 import 'package:chef_assistant/introscreens/introscreen1.dart';
 import 'package:chef_assistant/introscreens/introscreen2.dart';
@@ -24,7 +25,6 @@ class _IntroductionscreenState extends State<Introductionscreen> {
         _currentpage = _controller.page!.round();
       });
     });
-    // TODO: implement initState
     super.initState();
   }
 
@@ -51,6 +51,9 @@ class _IntroductionscreenState extends State<Introductionscreen> {
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.decelerate);
                   } else {
+                    setHasSeenIntro(true);
+                    setIsAdminLogged(false);
+                    setIsUserLogged(true);
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (ctx) => const HomeScreen()),
                         (Route<dynamic> route) => false);

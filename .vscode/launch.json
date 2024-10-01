@@ -7,13 +7,13 @@
 
         {
             "name": "chef_assistant",
-            "program": "lib/screens/main.dart",
+            "program": "lib/main.dart",
             "request": "launch",
             "type": "dart"
         },
         {
             "name": "chef_assistant (profile mode)",
-            "program": "lib/screens/main.dart",
+            "program": "lib/main.dart",
 
             "request": "launch",
             "type": "dart",
@@ -21,7 +21,7 @@
         },
         {
             "name": "chef_assistant (release mode)",
-            "program": "lib/screens/main.dart",
+            "program": "lib/main.dart",
 
             "request": "launch",
             "type": "dart",

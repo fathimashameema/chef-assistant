@@ -1,9 +1,8 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class EditPassword extends StatefulWidget {
   const EditPassword({super.key});
@@ -20,14 +19,12 @@ class _EditPasswordState extends State<EditPassword> {
   void initState() {
     _passwordController =
         TextEditingController(text: LoginStatus().currentPassword);
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
     _passwordController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 

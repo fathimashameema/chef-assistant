@@ -1,8 +1,8 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
-import 'package:chef_assistant/functions/login_status.dart';
-import 'package:chef_assistant/functions/signup.dart';
+import 'package:chef_assistant/db_functions/login.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
+import 'package:chef_assistant/db_functions/signup.dart';
 import 'package:chef_assistant/screens/home_screen.dart';
 import 'package:chef_assistant/models/user_values.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +29,12 @@ class _UserSignupState extends State<UserSignup> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _uservalues.openBox();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _uservalues.closeBox();
     _username.dispose();

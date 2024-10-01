@@ -4,6 +4,7 @@ description: "A new Flutter project."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
+
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -54,7 +55,6 @@ dependencies:
   contained_tab_bar_view_with_custom_page_navigator: ^0.1.3
   flutter_custom_tab_bar: ^1.2.1
   animation_custom_tabbar: ^0.0.1
-  shared_preferences: ^2.3.2
   image_picker: ^1.1.2
   chips_choice: ^3.0.1
  
@@ -71,12 +71,8 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   hive_generator: ^2.0.1
   build_runner: ^2.4.12
-  flutter_launcher_icons: "^0.14.0"
 
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/default_food.jpg"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -97,6 +93,7 @@ flutter:
     - assets\images\intoduction screen (1).png
     - assets\images\intoduction screen (2).png
     - assets\animations\Flow 1 (4).json
+    - assets\animations\Flow 2.json
     - assets\images\Untitled_design-removebg-preview 2.png
     - assets\images\WhatsApp_Image_2024-08-08_at_00.18.03_d74232e0-removebg-preview.png
     - assets\images\pexels-photo-70497.jpeg

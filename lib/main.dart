@@ -1,11 +1,11 @@
 import 'package:chef_assistant/customs/colors.dart';
-import 'package:chef_assistant/functions/add_categories.dart';
-import 'package:chef_assistant/functions/add_favourites.dart';
-import 'package:chef_assistant/functions/add_item.dart';
-import 'package:chef_assistant/functions/add_shopping_item.dart';
-import 'package:chef_assistant/functions/add_trending_now.dart';
-import 'package:chef_assistant/functions/signup.dart';
-import 'package:chef_assistant/functions/user_add_items.dart';
+import 'package:chef_assistant/db_functions/add_categories.dart';
+import 'package:chef_assistant/db_functions/add_favourites.dart';
+import 'package:chef_assistant/db_functions/add_item.dart';
+import 'package:chef_assistant/db_functions/add_shopping_item.dart';
+import 'package:chef_assistant/db_functions/add_trending_now.dart';
+import 'package:chef_assistant/db_functions/signup.dart';
+import 'package:chef_assistant/db_functions/user_add_items.dart';
 import 'package:chef_assistant/models/categories_model.dart';
 import 'package:chef_assistant/models/favourites_model.dart';
 import 'package:chef_assistant/models/recipe_items.dart';
@@ -61,6 +61,8 @@ Future<void> main(List<String> args) async {
     Hive.registerAdapter(ShoppingCartModelAdapter());
     await AddShoppingItem().openShoppingCartBox();
   }
+
+
   runApp(const ChefAssistant());
 }
 

@@ -317,3 +317,70 @@ TextStyle customCategoryText({
       shadows:
           List.filled(3,const Shadow(color: PresetColors.fadedgrey, blurRadius: 8)));
 }
+
+ Stack introScreens(
+    double screenHeight,
+    double screenWidth,
+    BoxConstraints constraints,
+    String image,
+    String heading,
+    String description,
+  ) {
+    return Stack(
+      children: [
+        Positioned(
+          top: screenHeight * 0.15,
+          left: screenWidth * 0.07,
+          child: SizedBox(
+            height: screenHeight * 0.4,
+            width: screenWidth * 0.86,
+            child: Image.asset(
+              // 'assets/i/mages/intoduction screen (2).png',
+              image,
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: screenHeight * 0.31,
+          left: constraints.maxWidth < 600
+              ? screenWidth * 0.25
+              : screenWidth * 0.37,
+          child: Text(
+            heading,
+            // 'Find your Dish',
+            style: GoogleFonts.lemon(
+              fontSize: constraints.maxWidth < 600
+                  ? screenWidth * 0.065
+                  : screenWidth * 0.03,
+              fontWeight: FontWeight.w500,
+              color: const Color.fromARGB(255, 210, 153, 20),
+            ),
+          ),
+        ),
+        // Description Text
+        Positioned(
+          bottom: screenHeight * 0.148,
+          left: screenWidth * 0.04,
+          child: SizedBox(
+            height: screenHeight * 0.125,
+            width: screenWidth * 0.89,
+            child: Text(
+              description,
+              // 'Explore the varieties of recipes and find your comfort food. '
+              // 'Find your favourite Dish with Chef Assistant.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: constraints.maxWidth < 600
+                    ? screenWidth * 0.05
+                    : screenWidth * 0.02,
+                fontWeight: FontWeight.w300,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+

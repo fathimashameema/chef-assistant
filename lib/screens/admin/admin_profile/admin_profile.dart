@@ -1,7 +1,8 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_appbar.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
+import 'package:chef_assistant/db_functions/login.dart';
+import 'package:chef_assistant/db_functions/login_status_functions.dart';
 import 'package:chef_assistant/screens/user/user_login.dart';
 
 import 'package:flutter/material.dart';
@@ -67,8 +68,10 @@ class _AdminProfileState extends State<AdminProfile> {
               TextButton(
                   onPressed: () {
                     Login().adminLogout();
+                    // Login().setAdminStatus(false);
+                    setIsAdminLogged(false);
                     Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (ctx) => Userlogin()),
+                        MaterialPageRoute(builder: (ctx) => const Userlogin()),
                         (Route<dynamic> route) => false);
                   },
                   child: const Text(

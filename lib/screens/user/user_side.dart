@@ -1,5 +1,5 @@
 import 'package:chef_assistant/customs/custom_bottomnavbar.dart';
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
 import 'package:chef_assistant/screens/user/user_add_recipe/user_add_recipe.dart';
 import 'package:chef_assistant/screens/user/categories.dart';
 import 'package:chef_assistant/screens/user/homepage.dart';
@@ -11,13 +11,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserSide extends StatefulWidget {
-  const UserSide({super.key});
+  final bool? isUserLogged;
+  const UserSide({super.key, this.isUserLogged});
 
   @override
   State<UserSide> createState() => _UserSideState();
 }
 
 class _UserSideState extends State<UserSide> {
+  bool? isUserLogged;
+
   List<NavItem> navItems = [
     NavItem(icon: Icons.home_filled),
     NavItem(icon: Icons.grid_view_rounded),
@@ -37,6 +40,7 @@ class _UserSideState extends State<UserSide> {
   ];
 
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;

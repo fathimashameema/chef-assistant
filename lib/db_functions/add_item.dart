@@ -32,9 +32,10 @@ class AddItem {
       {required int index, required RecipeItems recipeItem}) async {
     await openRecipeBox();
     _recipeItemsbox!.putAt(index, recipeItem);
+
     recipeItemsNotifier.value = _recipeItemsbox!.values.toList();
     recipeItemsNotifier.notifyListeners();
-    getRecipes();
+    // getRecipes();
     print('edited recipe');
   }
 

@@ -1,9 +1,8 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class EditUsername extends StatefulWidget {
     final Function(String) onUsernameChanged;
@@ -21,14 +20,12 @@ class _EditUsernameState extends State<EditUsername> {
   void initState() {
     _usernameController =
         TextEditingController(text: LoginStatus().currentUser);
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
     _usernameController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -96,7 +93,7 @@ class _EditUsernameState extends State<EditUsername> {
         context: context,
         builder: (ctx) {
           return customAlertDialogue(
-              title: Text('Save changes ?'),
+              title: const Text('Save changes ?'),
               // content: Text('Save changes ?'),
               actions: [
                 TextButton(

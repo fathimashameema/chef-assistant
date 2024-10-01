@@ -1,7 +1,8 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login_status_functions.dart';
 import 'package:chef_assistant/screens/admin/admin_login.dart';
 import 'package:chef_assistant/screens/user/user_login.dart';
 import 'package:chef_assistant/screens/user/user_profile/edit_password.dart';
@@ -137,6 +138,9 @@ class _UserProfileState extends State<UserProfile> {
   Future<void> logoutUser() async {
     try {
       await Login().logOutUser();
+      // Login().setLoginStatus(false);
+      setIsUserLogged(false);
+      
       Navigator.of(context).pushAndRemoveUntil(
           (MaterialPageRoute(
             builder: (ctx) => const Userlogin(),

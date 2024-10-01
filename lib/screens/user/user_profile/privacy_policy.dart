@@ -42,7 +42,7 @@ class PrivacyPolicy extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Text(
-              "Chef Assistant (\"we,\" \"us,\" or \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the \"App\"). By accessing or using the App, you agree to this Privacy Policy. If you do not agree with the terms of this policy, please do not use our App.",
+              "Chef Assistant (\"we,\" \"us,\" or \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the \"Chef Assistent\"). By accessing or using the App, you agree to this Privacy Policy. If you do not agree with the terms of this policy, please do not use our App.",
               style: TextStyle(
                 color: PresetColors.offwhite,
                 fontSize: 14,
@@ -60,7 +60,7 @@ class PrivacyPolicy extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Text(
-              "a. Personal Information\nWe may collect personal information, such as name, email address, username, and profile picture when you sign up or log in to Chef Assistant.",
+              "a. Personal Information\nWe may collect personal information, such as name, email address and username when you sign up or log in to Chef Assistant.",
               style: TextStyle(
                 color: PresetColors.offwhite,
                 fontSize: 14,

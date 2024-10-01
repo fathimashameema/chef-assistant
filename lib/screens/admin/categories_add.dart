@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_appbar.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/add_categories.dart';
+import 'package:chef_assistant/db_functions/add_categories.dart';
 import 'package:chef_assistant/models/categories_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -22,12 +22,11 @@ class _CategoriesAddState extends State<CategoriesAdd> {
   final _formKey = GlobalKey<FormState>();
   final _editFormkey = GlobalKey<FormState>();
 
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _editTitleController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _editTitleController = TextEditingController();
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _titleController.dispose();
     _editTitleController.dispose();
@@ -71,94 +70,99 @@ class _CategoriesAddState extends State<CategoriesAdd> {
         centerTitle: true,
         backgroundColor: PresetColors.themegreen,
       ),
-      body: ValueListenableBuilder(
-        valueListenable: categoryNotifier,
-        builder: (context, value, child) {
-          if (value.isEmpty) {
-            return const Center(
-              child: Text('No categories added'),
-            );
-          } else {
-            return Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: GridView.builder(
-                  itemCount: value.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 30,
-                    mainAxisSpacing: 30,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemBuilder: (context, index) {
-                    final category = value[index];
-                    return GridTile(
-                        child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Opacity(
-                            opacity: 0.5,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: category.image != null
-                                  ? Image.memory(
-                                      category.image!,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/category cooking pot.jpg',
-                                      fit: BoxFit.cover),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return ValueListenableBuilder(
+            valueListenable: categoryNotifier,
+            builder: (context, value, child) {
+              if (value.isEmpty) {
+                return const Center(
+                  child: Text('No categories added'),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: GridView.builder(
+                      itemCount: value.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: constraints.maxWidth < 600 ? 2 : 4,
+                        crossAxisSpacing: 30,
+                        mainAxisSpacing: 30,
+                        childAspectRatio:
+                            constraints.maxWidth < 600 ? 0.7 : 0.8,
+                      ),
+                      itemBuilder: (context, index) {
+                        final category = value[index];
+                        return GridTile(
+                            child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Opacity(
+                                opacity: 0.5,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: category.image != null
+                                      ? Image.memory(
+                                          category.image!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/category cooking pot.jpg',
+                                          fit: BoxFit.cover),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 30.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                category.name,
-                                style: customCategoryText(),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    category.name,
+                                    style: customCategoryText(),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 5,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  editCategory(index);
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: PresetColors.offwhite,
-                                  size: 18,
-                                ),
+                            ),
+                            Positioned(
+                              bottom: 5,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      editCategory(index);
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: PresetColors.offwhite,
+                                      size: 18,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        deleteCategory(index);
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: PresetColors.offwhite,
+                                      size: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                width: 40,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    deleteCategory(index);
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: PresetColors.offwhite,
-                                  size: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ));
-                  }),
-            );
-          }
+                            )
+                          ],
+                        ));
+                      }),
+                );
+              }
+            },
+          );
         },
       ),
     );
@@ -206,8 +210,8 @@ class _CategoriesAddState extends State<CategoriesAdd> {
   }
 
   Future<void> addCategory() async {
-    File? PickedImage;
-    Uint8List? ImageData;
+    File? pickedImage;
+    Uint8List? imageData;
 
     return await showDialog(
       context: context,
@@ -225,21 +229,26 @@ class _CategoriesAddState extends State<CategoriesAdd> {
                   final XFile? image =
                       await imagePicker.pickImage(source: ImageSource.gallery);
                   if (image != null) {
-                    ImageData = await image.readAsBytes();
+                    imageData = await image.readAsBytes();
                     setState(() {
-                      PickedImage = File(image.path);
+                      pickedImage = File(image.path);
                     });
                   }
                 },
                 child: Container(
                   color: PresetColors.offwhite,
                   height: 230,
-                  child: PickedImage == null
+                  child: pickedImage == null
                       ? const Icon(Icons.image)
-                      : Image.file(
-                          PickedImage!,
-                          fit: BoxFit.cover,
-                        ),
+                      : kIsWeb
+                          ? Image.memory(
+                              imageData!,
+                              fit: BoxFit.fill,
+                            )
+                          : Image.file(
+                              pickedImage!,
+                              fit: BoxFit.cover,
+                            ),
                 ),
               ),
               content: Form(
@@ -281,7 +290,7 @@ class _CategoriesAddState extends State<CategoriesAdd> {
                         _formKey.currentState!.validate()) {
                       final category = CategoriesModel(
                         name: _titleController.text,
-                        image: ImageData,
+                        image: imageData,
                       );
 
                       if (await AddCategories().isItemExist(category)) {
@@ -312,8 +321,9 @@ class _CategoriesAddState extends State<CategoriesAdd> {
   }
 
   Future<void> editCategory(int index) async {
+    // ignore: unused_local_variable
     File? pickedImage;
-    Uint8List? imageData;
+    Uint8List? imageData = categoryNotifier.value[index].image;
     final category = categoryNotifier.value[index].name;
     _editTitleController.text = category;
 
@@ -341,13 +351,11 @@ class _CategoriesAddState extends State<CategoriesAdd> {
                 },
                 child: Container(
                   color: PresetColors.offwhite,
-                  height: 230,
-                  child: pickedImage == null
-                      ? const Icon(Icons.image)
-                      : Image.file(
-                          pickedImage!,
-                          fit: BoxFit.cover,
-                        ),
+                  height: 260,
+                  child: Image.memory(
+                    imageData!,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
               content: Form(

@@ -70,7 +70,7 @@ class AddCategories {
     _categoriesBox!.putAt(index, category);
     categoryNotifier.value = _categoriesBox!.values.toList();
     categoryNotifier.notifyListeners();
-    print('edited');
+    print('category edited');
   }
 
   Future<bool> isItemExist(CategoriesModel category) async {

@@ -1,7 +1,8 @@
+import 'package:chef_assistant/db_functions/login_status_functions.dart';
 import 'package:chef_assistant/screens/admin/admin_login.dart';
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/login.dart';
+import 'package:chef_assistant/db_functions/login.dart';
 import 'package:chef_assistant/screens/home_screen.dart';
 import 'package:chef_assistant/screens/user/user_signup.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ class _UserloginState extends State<Userlogin> {
   void dispose() {
     _username.dispose();
     _password.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -41,235 +41,273 @@ class _UserloginState extends State<Userlogin> {
       },
       child: Scaffold(
         backgroundColor: PresetColors.clipColor,
-        body: Stack(
-          children: [
-            Positioned(
-              top: screenHeight * 0.09,
-              left: screenWidth * 0.09,
-              child: Text('Log-in',
-                  style: GoogleFonts.orelegaOne(
-                    color: PresetColors.white,
-                    fontSize: screenWidth * 0.12,
-                  )),
-            ),
-            Positioned(
-                top: screenHeight * 0.07,
-                right: screenWidth * 0.09,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (ctxt) {
-                        return const HomeScreen();
-                      }),
-                      (Route<dynamic> route) => false,
-                    );
-                  },
-                  child: Text(
-                    'Skip',
-                    style: TextStyle(
-                      color: PresetColors.white,
-                      fontSize: screenWidth * 0.04,
-                    ),
-                  ),
-                )),
-            Padding(
-              padding: const EdgeInsets.only(top: 180.0),
-              child: ClipPath(
-                clipper: OvalTopBorderClipper(),
-                child: Container(
-                  height: screenHeight * 0.8,
-                  width: double.infinity,
-                  color: PresetColors.customBlack,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: FormBuilder(
-                        key: _formkey,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 35.0,
-                            right: 35,
-                            top: 60,
-                          ),
-                          child: ListView(
-                            children: [
-                              Text(
-                                'User name/Email',
-                                style: TextStyle(
-                                  color: PresetColors.white,
-                                  fontSize: screenWidth * 0.056,
-                                ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return Stack(
+              children: [
+                Positioned(
+                  top: screenHeight * 0.09,
+                  left: screenWidth * 0.09,
+                  child: Text('Log-in',
+                      style: GoogleFonts.orelegaOne(
+                        color: PresetColors.white,
+                        fontSize: constraints.maxWidth < 600
+                            ? screenWidth * 0.12
+                            : screenWidth * 0.05,
+                      )),
+                ),
+                Positioned(
+                    top: screenHeight * 0.07,
+                    right: screenWidth * 0.09,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (ctxt) {
+                            return const HomeScreen();
+                          }),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          color: PresetColors.white,
+                          fontSize: constraints.maxWidth < 600
+                              ? screenWidth * 0.04
+                              : screenWidth * 0.018,
+                        ),
+                      ),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(top: 180.0),
+                  child: ClipPath(
+                    clipper: OvalTopBorderClipper(),
+                    child: Container(
+                      height: screenHeight * 0.8,
+                      width: double.infinity,
+                      color: PresetColors.customBlack,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: FormBuilder(
+                            key: _formkey,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 35.0,
+                                right: 35,
+                                top: 60,
                               ),
-                              TextFormField(
-                                autovalidateMode:
-                                    AutovalidateMode.onUserInteraction,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Username field can't be empty";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                controller: _username,
-                                decoration: customInputDecoration(
-                                    hintText: 'Your Username or Email'),
-                              ),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Text(
-                                'Password',
-                                style: TextStyle(
-                                  color: PresetColors.white,
-                                  fontSize: screenWidth * 0.056,
-                                ),
-                              ),
-                              TextFormField(
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Password field can't be empty";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  controller: _password,
-                                  obscureText: !visibility,
-                                  decoration: customInputDecoration(
-                                    hintText: 'Your Password',
-                                    sufixIcon: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          visibility = !visibility;
-                                        });
-                                      },
-                                      child: visibility
-                                          ? Icon(
-                                              Icons.visibility_off,
-                                              color: PresetColors.white,
-                                              size: screenWidth * 0.04,
-                                            )
-                                          : Icon(
-                                              Icons.visibility,
-                                              color: PresetColors.white,
-                                              size: screenWidth * 0.04,
-                                            ),
-                                    ),
-                                  )),
-                              Column(
+                              child: ListView(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 40,
-                                      bottom: 10,
+                                  Text(
+                                    'User name/Email',
+                                    style: TextStyle(
+                                      color: PresetColors.white,
+                                      fontSize: constraints.maxWidth < 600
+                                          ? screenWidth * 0.056
+                                          : screenWidth * 0.02,
                                     ),
-                                    child: SizedBox(
-                                      width: screenWidth * 0.67,
-                                      child: TextButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                WidgetStateProperty.all(
-                                                    PresetColors.buttonColor),
-                                            shape: WidgetStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () async {
-                                            if (_formkey.currentState != null &&
-                                                _formkey.currentState!
-                                                    .validate()) {
-                                              final usernameOrEmail =
-                                                  _username.text;
-                                              final password = _password.text;
-                                              final haveAccount = await Login()
-                                                  .getUser(
-                                                      usernameoremail:
-                                                          usernameOrEmail,
-                                                      password: password);
-
-                                              haveAccount
-                                                  ? gotohomepage(context)
-                                                  : showerror();
-                                            } else {
-                                              print('null is here');
-                                            }
-                                          },
-                                          child: Text(
-                                            'Login',
-                                            style: TextStyle(
-                                              color: PresetColors.black,
-                                              fontSize: screenWidth * 0.053,
-                                            ),
-                                          )),
-                                    ),
+                                  ),
+                                  TextFormField(
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Username field can't be empty";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    controller: _username,
+                                    decoration: customInputDecoration(
+                                        hintText: 'Your Username or Email'),
+                                  ),
+                                  const SizedBox(
+                                    height: 40,
                                   ),
                                   Text(
-                                    "Don't have an account?",
+                                    'Password',
                                     style: TextStyle(
-                                      color: PresetColors.fadedgrey,
-                                      fontSize: screenWidth * 0.04,
+                                      color: PresetColors.white,
+                                      fontSize: constraints.maxWidth < 600
+                                          ? screenWidth * 0.056
+                                          : screenWidth * 0.02,
                                     ),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (ctx) => const UserSignup()));
-                                    },
-                                    child: Text(
-                                      'Create an Account',
-                                      style: TextStyle(
-                                        color: PresetColors.offwhite,
-                                        fontSize: screenWidth * 0.047,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: screenHeight * 0.14,
-                              ),
-                              TextButton(
-                                  style: ButtonStyle(
-                                    overlayColor:
-                                        WidgetStateProperty.resolveWith(
-                                            (state) =>
-                                                PresetColors.customBlack),
-                                  ),
-                                  onPressed: () {
-                                    adminlogin();
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  TextFormField(
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Password field can't be empty";
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      controller: _password,
+                                      obscureText: !visibility,
+                                      decoration: customInputDecoration(
+                                        hintText: 'Your Password',
+                                        sufixIcon: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              visibility = !visibility;
+                                            });
+                                          },
+                                          child: visibility
+                                              ? Icon(
+                                                  Icons.visibility_off,
+                                                  color: PresetColors.white,
+                                                  size:
+                                                      constraints.maxWidth < 600
+                                                          ? screenWidth * 0.04
+                                                          : screenWidth * 0.02,
+                                                )
+                                              : Icon(
+                                                  Icons.visibility,
+                                                  color: PresetColors.white,
+                                                  size:
+                                                      constraints.maxWidth < 600
+                                                          ? screenWidth * 0.04
+                                                          : screenWidth * 0.02,
+                                                ),
+                                        ),
+                                      )),
+                                  Column(
                                     children: [
-                                      Icon(
-                                        Icons.admin_panel_settings,
-                                        color: PresetColors.white,
-                                        size: screenWidth * 0.045,
-                                      ),
-                                      const SizedBox(
-                                        width: 6,
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 40,
+                                          bottom: 10,
+                                        ),
+                                        child: SizedBox(
+                                          width: constraints.maxWidth < 600
+                                              ? screenWidth * 0.67
+                                              : screenWidth * 0.4,
+                                          child: TextButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStateProperty.all(
+                                                        PresetColors
+                                                            .buttonColor),
+                                                shape: WidgetStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () async {
+                                                if (_formkey.currentState !=
+                                                        null &&
+                                                    _formkey.currentState!
+                                                        .validate()) {
+                                                  final usernameOrEmail =
+                                                      _username.text;
+                                                  final password =
+                                                      _password.text;
+                                                  final haveAccount =
+                                                      await Login().getUser(
+                                                          usernameoremail:
+                                                              usernameOrEmail,
+                                                          password: password);
+
+                                                  haveAccount
+                                                      ? gotohomepage(context)
+                                                      : showerror();
+                                                } else {
+                                                  print('null is here');
+                                                }
+                                              },
+                                              child: Text(
+                                                'Login',
+                                                style: TextStyle(
+                                                  color: PresetColors.black,
+                                                  fontSize:
+                                                      constraints.maxWidth < 600
+                                                          ? screenWidth * 0.053
+                                                          : screenWidth * 0.03,
+                                                ),
+                                              )),
+                                        ),
                                       ),
                                       Text(
-                                        'Admin',
+                                        "Don't have an account?",
                                         style: TextStyle(
-                                          color: PresetColors.white,
-                                          fontSize: screenWidth * 0.038,
+                                          color: PresetColors.fadedgrey,
+                                          fontSize: constraints.maxWidth < 600
+                                              ? screenWidth * 0.04
+                                              : screenWidth * 0.017,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (ctx) =>
+                                                      const UserSignup()));
+                                        },
+                                        child: Text(
+                                          'Create an Account',
+                                          style: TextStyle(
+                                            color: PresetColors.offwhite,
+                                            fontSize: constraints.maxWidth < 600
+                                                ? screenWidth * 0.047
+                                                : screenWidth * 0.024,
+                                          ),
                                         ),
                                       ),
                                     ],
-                                  ))
-                            ],
-                          ),
-                        )),
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * 0.14,
+                                  ),
+                                  TextButton(
+                                      style: ButtonStyle(
+                                        overlayColor:
+                                            WidgetStateProperty.resolveWith(
+                                                (state) =>
+                                                    PresetColors.customBlack),
+                                      ),
+                                      onPressed: () {
+                                        adminlogin();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.admin_panel_settings,
+                                            color: PresetColors.white,
+                                            size: constraints.maxWidth < 600
+                                                ? screenWidth * 0.045
+                                                : screenWidth * 0.025,
+                                          ),
+                                          const SizedBox(
+                                            width: 6,
+                                          ),
+                                          Text(
+                                            'Admin',
+                                            style: TextStyle(
+                                              color: PresetColors.white,
+                                              fontSize:
+                                                  constraints.maxWidth < 600
+                                                      ? screenWidth * 0.038
+                                                      : screenWidth * 0.018,
+                                            ),
+                                          ),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            )),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ],
+              ],
+            );
+          },
         ),
       ),
     );
@@ -277,7 +315,10 @@ class _UserloginState extends State<Userlogin> {
 
   Future<void> gotohomepage(BuildContext cntxt) async {
     Login().userLogin();
-
+    // Login().setLoginStatus(true);
+    // Login().setAdminStatus(false);
+    setIsUserLogged(true);
+    setIsAdminLogged(false);
     Navigator.of(cntxt).pushAndRemoveUntil(
       MaterialPageRoute(builder: (ctx) => const HomeScreen()),
       (Route<dynamic> route) => false,

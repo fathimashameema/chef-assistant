@@ -1,7 +1,7 @@
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_appbar.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
-import 'package:chef_assistant/functions/add_shopping_item.dart';
+import 'package:chef_assistant/db_functions/add_shopping_item.dart';
 import 'package:flutter/material.dart';
 import 'package:chef_assistant/models/shopping_cart_model.dart';
 

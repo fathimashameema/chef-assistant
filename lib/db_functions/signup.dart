@@ -1,4 +1,4 @@
-import 'package:chef_assistant/functions/login_status.dart';
+import 'package:chef_assistant/db_functions/login_status.dart';
 import 'package:chef_assistant/models/user_values.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
