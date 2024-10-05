@@ -24,12 +24,6 @@ class _AdminNotificationsState extends State<AdminNotifications> {
     _userAddItems.openUserItemBox();
   }
 
-  @override
-  void dispose() {
-    _userAddItems.closeUserItemBox();
-    super.dispose();
-  }
-
   Future<void> deleteItem(int index) async {
     await showDialog(
         context: context,

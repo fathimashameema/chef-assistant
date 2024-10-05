@@ -22,12 +22,6 @@ class _AdminCategoriesState extends State<AdminCategories> {
   }
 
   @override
-  void dispose() {
-    AddCategories().closeCategoriesBox();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PresetColors.black,

@@ -1,3 +1,4 @@
+
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/db_functions/add_categories.dart';
 import 'package:chef_assistant/db_functions/add_favourites.dart';
@@ -21,47 +22,41 @@ Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
+
   if (!Hive.isAdapterRegistered(UserValuesAdapter().typeId)) {
     Hive.registerAdapter(UserValuesAdapter());
     await Signup().openBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(RecipeItemsAdapter().typeId)) {
     Hive.registerAdapter(RecipeItemsAdapter());
     await AddItem().openRecipeBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(TrendingNowAdapter().typeId)) {
     Hive.registerAdapter(TrendingNowAdapter());
     await AddTrendingNow().openBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(CategoriesModelAdapter().typeId)) {
     Hive.registerAdapter(CategoriesModelAdapter());
     await AddCategories().openCategoriesBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserItemsAdapter().typeId)) {
     Hive.registerAdapter(UserItemsAdapter());
     await UserAddItems().openUserItemBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(FavouritesModelAdapter().typeId)) {
     Hive.registerAdapter(FavouritesModelAdapter());
     await AddFavourites().openFavouritesBox();
   }
 
-  await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(ShoppingCartModelAdapter().typeId)) {
     Hive.registerAdapter(ShoppingCartModelAdapter());
     await AddShoppingItem().openShoppingCartBox();
   }
-
 
   runApp(const ChefAssistant());
 }

@@ -1,10 +1,10 @@
-import 'dart:typed_data';
 
 import 'package:chef_assistant/customs/colors.dart';
 import 'package:chef_assistant/customs/custom_styles.dart';
 import 'package:chef_assistant/db_functions/add_item.dart';
 import 'package:chef_assistant/models/recipe_items.dart';
 import 'package:chef_assistant/screens/admin/add_recipe/recipe_values.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Directions extends StatefulWidget {
@@ -113,7 +113,7 @@ class _DirectionsState extends State<Directions> {
                     ),
                   ),
                   SizedBox(
-                    height: constraints.maxWidth < 600 ? 0 : screenWidth * 0.08,
+                    height: kIsWeb ? screenHeight * 0.08 : 0,
                   ),
                 ],
               );

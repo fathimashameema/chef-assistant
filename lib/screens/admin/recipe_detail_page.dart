@@ -17,7 +17,6 @@ class RecipeDetailPage extends StatefulWidget {
 }
 
 class _RecipeDetailPageState extends State<RecipeDetailPage> {
-  // This list will hold the state of the checkboxes for each ingredient
   List<bool>? _checkedIngredients;
 
   @override
@@ -26,7 +25,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
     _initializeIngredientsState();
   }
 
-  // Function to initialize checkbox states
   Future<void> _initializeIngredientsState() async {
     if (widget.recipe.ingredients != null) {
       _checkedIngredients =
@@ -144,8 +142,9 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                       style: profileHeadingStyle(fontSize: 18),
                                     ),
                                   ),
-                                  LoginStatus().isLogged
-                                      ? Checkbox(
+                                  LoginStatus().isAdmin
+                                      ? const SizedBox()
+                                      : Checkbox(
                                           value: _checkedIngredients?[index] ??
                                               false,
                                           onChanged: (bool? value) {
@@ -171,7 +170,6 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                                           activeColor: PresetColors.yellow,
                                           checkColor: PresetColors.black,
                                         )
-                                      : const SizedBox(),
                                 ],
                               );
                             }).toList(),

@@ -24,7 +24,7 @@ class _OverviewState extends State<Overview> {
   final TextEditingController prepTimeController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
   File? _pickedImage;
-  bool isVeg = true;
+  bool? isVeg;
   @override
   void initState() {
     setState(() {
@@ -170,7 +170,17 @@ class _OverviewState extends State<Overview> {
                         SizedBox(height: screenHeight * 0.03),
                         Row(
                           children: [
-                            customRadioButtons('Non-veg'),
+                            Radio(
+                              activeColor: PresetColors.yellow,
+                              value: 'Non-veg',
+                              groupValue: selectedValue,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  isVeg = false;
+                                  selectedValue = value;
+                                });
+                              },
+                            ),
                             const Text(
                               'Non-veg',
                               style: TextStyle(
@@ -179,7 +189,17 @@ class _OverviewState extends State<Overview> {
                             SizedBox(
                               width: screenWidth * 0.35,
                             ),
-                            customRadioButtons('Vegan'),
+                            Radio(
+                              activeColor: PresetColors.yellow,
+                              value: 'Vegan',
+                              groupValue: selectedValue,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  isVeg = true;
+                                  selectedValue = value;
+                                });
+                              },
+                            ),
                             const Text(
                               'Vegan',
                               style: TextStyle(
@@ -265,17 +285,5 @@ class _OverviewState extends State<Overview> {
     );
   }
 
-  Radio<String> customRadioButtons(String value) {
-    return Radio(
-        activeColor: PresetColors.yellow,
-        value: value,
-        groupValue: selectedValue,
-        onChanged: (String? value) async {
-          // await AddItem().Vegan();
-          isVeg = true;
-          setState(() {
-            selectedValue = value;
-          });
-        });
-  }
+  
 }

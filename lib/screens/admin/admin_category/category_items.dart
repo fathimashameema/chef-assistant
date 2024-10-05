@@ -135,8 +135,9 @@ class _CategoryItemsState extends State<CategoryItems> {
                                             ),
                                           ),
                                         ),
-                                        LoginStatus().isLogged
-                                            ? IconButton(
+                                        LoginStatus().isAdmin
+                                            ? const SizedBox()
+                                            : IconButton(
                                                 onPressed: () {
                                                   final favRecipe =
                                                       FavouritesModel(
@@ -164,8 +165,7 @@ class _CategoryItemsState extends State<CategoryItems> {
                                                     );
                                                   },
                                                 ),
-                                              )
-                                            : const SizedBox(),
+                                              ),
                                       ],
                                     ),
                                   );

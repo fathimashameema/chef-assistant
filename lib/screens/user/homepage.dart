@@ -71,6 +71,8 @@ class _HomepageState extends State<Homepage> {
   @override
   void dispose() {
     _searchController.dispose();
+    AddItem().closeRecipeBox();
+    AddTrendingNow().closeBox();
     super.dispose();
   }
 

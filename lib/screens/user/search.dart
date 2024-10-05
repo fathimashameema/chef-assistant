@@ -79,7 +79,7 @@ class _SearchState extends State<Search> {
         if (filter == 'Vegan') return recipe.isVeg == true;
         if (filter == 'Diet') return recipe.categories!.contains('Diet');
         if (filter == 'Breakfast') {
-          return recipe.categories!.contains('Breakfast ');
+          return recipe.categories!.contains('Breakfast');
         }
         if (filter == 'Lunch') return recipe.categories!.contains('Lunch');
         if (filter == 'Dinner') return recipe.categories!.contains('Dinner');
@@ -88,7 +88,7 @@ class _SearchState extends State<Search> {
         }
         if (filter == 'Juices') return recipe.categories!.contains('Juices');
         if (filter == '10 Minutes') return recipe.prepTime == '10 minutes';
-        if (filter == '15 Minutes') return recipe.prepTime == '15 minutes ';
+        if (filter == '15 Minutes') return recipe.prepTime == '15 minutes';
 
         return true;
       });
@@ -239,17 +239,15 @@ class _SearchState extends State<Search> {
                                                   ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: SizedBox(
-                                            height: screenHeight * 0.09,
-                                            // width: screenWidth * 0.3,
-                                            child: Text(
-                                              recipe.title ?? 'Untitled',
-                                              style: const TextStyle(
-                                                color: PresetColors.white,
-                                                fontSize: 18,
-                                              ),
+                                        SizedBox(
+                                          height: screenHeight * 0.09,
+                                          width: screenWidth * 0.3,
+                                          child: Text(
+                                            textAlign: TextAlign.left,
+                                            recipe.title ?? 'Untitled',
+                                            style: const TextStyle(
+                                              color: PresetColors.white,
+                                              fontSize: 18,
                                             ),
                                           ),
                                         ),

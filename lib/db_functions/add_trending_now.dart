@@ -1,6 +1,5 @@
 import 'package:chef_assistant/models/recipe_items.dart';
 import 'package:chef_assistant/models/trending_now.dart';
-import 'package:chef_assistant/screens/admin/admin_homepage.dart';
 import 'package:chef_assistant/screens/admin/trending_now/tending_now.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -34,8 +33,6 @@ class AddTrendingNow {
   Future<List<TrendingNow>> getTrendings() async {
     await openBox();
     trendingNowNotifier.value = _trendingNowBox!.values.toList();
-    // trendingNowNotifier.notifyListeners();
-    filteredTrendings.value = _trendingNowBox!.values.toList();
     return _trendingNowBox!.values.toList();
   }
 
@@ -45,7 +42,6 @@ class AddTrendingNow {
     final nonVegTrending = allTrendings
         .where((item) => item.trendingItems.isVeg == false)
         .toList();
-    filteredTrendings.value = nonVegTrending;
     print('nonVegTrending $nonVegTrending');
     getTrendings();
     return nonVegTrending;
@@ -56,7 +52,6 @@ class AddTrendingNow {
     final allTrendings = _trendingNowBox!.values.toList();
     final veganTrending =
         allTrendings.where((item) => item.trendingItems.isVeg == true).toList();
-    filteredTrendings.value = veganTrending;
     print('veganTrending $veganTrending');
     getTrendings();
     return veganTrending;
@@ -64,13 +59,11 @@ class AddTrendingNow {
 
   Future<void> deleteTrendingItem({required int index}) async {
     await openBox();
-    // _trendingNowList!.remove(recipe);
     await _trendingNowBox!.deleteAt(index);
     trendingNowNotifier.value = _trendingNowBox!.values.toList();
     print('Item deleted');
     print(_trendingNowBox!.values);
 
-    // getTrendings();
     trendingNowNotifier.notifyListeners();
   }
 
